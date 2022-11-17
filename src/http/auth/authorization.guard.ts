@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { GqlExecutionContext } from '@nestjs/graphql';
-import jwt from 'express-jwt';
+import { expressjwt as jwt, GetVerificationKey } from 'express-jwt';
 import { expressJwtSecret } from 'jwks-rsa';
 import { promisify } from 'node:util';
 @Injectable()
@@ -28,10 +28,10 @@ export class AuthorizationGuard implements CanActivate {
           rateLimit: true,
           jwksRequestsPerMinute: 5,
           jwksUri: `${this.AUTH0_DOMAIN}.well-known/jwks.json`,
-        }),
+        }) as GetVerificationKey,
         audience: this.AUTH0_AUDIENCE,
         issuer: this.AUTH0_DOMAIN,
-        algorithm: ['RS256'],
+        algorithms: ['RS256'],
       }),
     );
 
