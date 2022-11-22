@@ -9,6 +9,7 @@ datasource db {
 
 model Student {
   id          String       @id @default(uuid())
+  authUserId  String?      @unique
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @default(now()) @updatedAt
   enrollments Enrollment[]
@@ -28,12 +29,12 @@ model Course {
 }
 
 model Enrollment {
-  id          String    @id @default(uuid())
-  studentId   String
-  courseId    String
-  cancelledAt DateTime?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @default(now()) @updatedAt
+  id         String    @id @default(uuid())
+  studentId  String
+  courseId   String
+  canceledAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now()) @updatedAt
 
   student Student @relation(fields: [studentId], references: [id])
   course  Course  @relation(fields: [courseId], references: [id])

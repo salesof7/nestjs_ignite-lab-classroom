@@ -8,7 +8,7 @@ export class EnrollmentsService {
   listAllEnrollments() {
     return this.prisma.enrollment.findMany({
       where: {
-        cancelledAt: null,
+        canceledAt: null,
       },
       orderBy: {
         createdAt: 'desc',
@@ -20,7 +20,7 @@ export class EnrollmentsService {
     return this.prisma.enrollment.findMany({
       where: {
         studentId,
-        cancelledAt: null,
+        canceledAt: null,
       },
       orderBy: {
         createdAt: 'desc',
